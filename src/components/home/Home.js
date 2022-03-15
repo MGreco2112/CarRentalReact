@@ -14,13 +14,13 @@ const Home = () => {
             >
                 <h1
                 style={{
-                    textShadow: '1px, 1px, black'
+                    textShadow: '1px 1px black'
                 }}
                 >
                     Welcome to Expression Car Rental!</h1>
                 <h2
                 style={{
-                    textShadow: '1px, 1px, black'
+                    textShadow: '1px 1px black'
                 }}
                 >All cars have coffee holders</h2>
             </Splash>
