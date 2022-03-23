@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import NewUserForm from "./NewUserForm";
 import Container from "../common/Container"
@@ -19,6 +20,8 @@ const Register = (props) => {
         licenseNumber: "",
 
     })
+
+    const navigate = useNavigate();
 
     const updateForm = (field, value) => {
         setNewUser({
@@ -41,17 +44,41 @@ const Register = (props) => {
             const res = await axios.post(`${apiHostUrl}/api/auth/signup`, data);
 
             console.log(res.data);
+            login(data);
         } catch (err) {
             console.error(err.message);
         }
     }
 
-    const login = (data) => {
+    const login = async (data) => {
+        try {
+            const res = await axios.post(`${apiHostUrl}/api/auth/signin`, data);
 
+            console.log(res.data);
+
+            createCustomer(data, res.data.token);
+        } catch (err) {
+            console.error(err.response.data);
+        }
     }
 
-    const createCustomer = (data, token) => {
+    const createCustomer = async (data, token) => {
+        try {
+            const res = await axios.post(
+                `${apiHostUrl}/customers`, 
+                data, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
 
+            console.log(res.data);
+            navigate('/login');
+        } catch (err) {
+            console.error(err.response.data);
+        }
     }
 
     return (
