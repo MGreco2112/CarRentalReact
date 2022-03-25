@@ -27,7 +27,7 @@ const Register = (props) => {
         setNewUser({
             ...newUser,
             [field]: value
-        })
+        });
     }
 
     const onSubmit = () => {

@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Container from "../common/Container";
 import Splash from "../common/Splash";
 import splashImg from "../../assets/splash.jpg"
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Home = () => {
+    const [auth] = useContext(AuthContext);
+
     return (
         <Container>
             <Splash
@@ -23,6 +26,8 @@ const Home = () => {
                     textShadow: '1px 1px black'
                 }}
                 >All cars have coffee holders</h2>
+
+                {/* <h2>{auth.token}</h2> */}
             </Splash>
         </Container>
     )
